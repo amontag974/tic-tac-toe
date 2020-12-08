@@ -61,11 +61,12 @@ function playerFormHandler() {
     createPlayer();
 
     if (currentPlayers.length === 1) {
-        document.querySelector('span').innerText = 'Player Two - Enter your name:'
         document.querySelector('#name-input').value = ""
+        document.querySelector('#name-input').setAttribute('placeholder', 'Player 2');
     }
     else {
         document.querySelector('#player-creation').remove();
+        document.querySelector('.title').remove();
         displayPlayers();
         displayBoard();
     }
@@ -290,10 +291,16 @@ function removePointer() {
 }
 
 function addResetButton() {
+    const resetButtonContainer = document.createElement('div');
     const resetButton = document.createElement('button');
-    resetButton.setAttribute('type',"button");
+
+    resetButtonContainer.setAttribute('class','button-container');
+    resetButton.setAttribute('type','button');
+    resetButton.setAttribute('class','reset');
     resetButton.innerText = "Reset";
-    document.getElementsByTagName('body')[0].appendChild(resetButton);
+
+    resetButtonContainer.appendChild(resetButton);
+    document.getElementsByTagName('body')[0].appendChild(resetButtonContainer);
 
     resetButton.addEventListener("click", resetGame);
 }
@@ -311,6 +318,6 @@ function resetGame() {
 }
 
 (function () {
-    const createPlayerButton = document.querySelector('.p1-submit');
+    const createPlayerButton = document.querySelector('.player-submit');
     createPlayerButton.addEventListener('click', playerFormHandler);
 })();
